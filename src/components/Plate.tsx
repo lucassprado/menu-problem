@@ -1,4 +1,4 @@
-import { PlateProps } from '@/utils/create-more-profitable-menu'
+import { PlateProps } from './MenuForm'
 
 interface PlateComponentProps {
   plate: PlateProps

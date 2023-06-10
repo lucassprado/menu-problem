@@ -1,5 +1,9 @@
-import { MenuProps } from '@/utils/create-more-profitable-menu'
 import { Plate } from './Plate'
+import { PlateProps } from './MenuForm'
+
+export interface MenuProps {
+  [key: string]: PlateProps
+}
 
 interface MenuComponentProps {
   menu: MenuProps
@@ -23,7 +27,7 @@ export function Menu({ menu, onCreateAnotherMenu }: MenuComponentProps) {
           Pratos escolhidos para o cardápio:
         </p>
 
-        <div className="flex gap-8 flex-wrap">
+        <div className="grid grid-cols-4 gap-x-12 gap-y-12">
           {Object.entries(menu).map(([day, plate]) => (
             <Plate key={plate.name} day={day} plate={plate} />
           ))}

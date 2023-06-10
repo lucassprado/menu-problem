@@ -1,12 +1,5 @@
-export interface PlateProps {
-  name: number
-  cost: number
-  profit: number
-}
-
-export interface MenuProps {
-  [key: string]: PlateProps
-}
+import { MenuProps } from '@/components/Menu'
+import { PlateProps } from '@/components/MenuForm'
 
 export function createMenu(
   daysCount: number,

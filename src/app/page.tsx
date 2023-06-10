@@ -2,14 +2,10 @@
 
 import { useState } from 'react'
 
-import { Menu } from '@/components/Menu'
-import { MenuForm } from '@/components/MenuForm'
+import { Menu, MenuProps } from '@/components/Menu'
+import { MenuForm, PlateProps } from '@/components/MenuForm'
 
-import {
-  createMenu,
-  MenuProps,
-  PlateProps,
-} from '@/utils/create-more-profitable-menu'
+import { createMenu } from '@/utils/create-more-profitable-menu'
 
 export default function Home() {
   const [menu, setMenu] = useState<MenuProps | null>(null)

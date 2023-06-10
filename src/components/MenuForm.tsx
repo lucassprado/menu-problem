@@ -3,7 +3,11 @@ import { useEffect, useState } from 'react'
 import { Input } from './Input'
 import { PlateForm } from './PlateForm'
 
-import { PlateProps } from '@/utils/create-more-profitable-menu'
+export interface PlateProps {
+  name: number
+  cost: number
+  profit: number
+}
 
 interface MenuFormProps {
   onCreateMenu: (
@@ -14,9 +18,9 @@ interface MenuFormProps {
 }
 
 export function MenuForm({ onCreateMenu }: MenuFormProps) {
-  const [daysCount, setDaysCount] = useState<number>(0)
-  const [platesAmount, setPlatesAmount] = useState<number>(0)
-  const [budget, setBudget] = useState<number>(0)
+  const [daysCount, setDaysCount] = useState<number | null>(null)
+  const [platesAmount, setPlatesAmount] = useState<number | null>(null)
+  const [budget, setBudget] = useState<number | null>(null)
   const [plates, setPlates] = useState<PlateProps[]>([])
 
   function onPlateCostChange(cost: number, plateName: string | number) {
@@ -50,19 +54,26 @@ export function MenuForm({ onCreateMenu }: MenuFormProps) {
   }
 
   function isAllPlatesFilled() {
-    let isFilled = true
+    let isValid = true
 
     plates.forEach((plate) => {
-      if (!plate.cost || !plate.profit) {
-        isFilled = false
+      const isPlateCostValid =
+        !!plate.cost && plate.cost >= 1 && plate.cost <= 50
+      const isPlateProfitValid =
+        !!plate.profit && plate.profit >= 1 && plate.profit <= 10000
+
+      if (!isPlateCostValid || !isPlateProfitValid) {
+        isValid = false
       }
     })
 
-    return isFilled
+    return isValid
   }
 
   function handleCreateMenu() {
-    onCreateMenu(daysCount, budget, plates)
+    if (daysCount && budget) {
+      onCreateMenu(daysCount, budget, plates)
+    }
   }
 
   useEffect(() => {
@@ -78,8 +89,20 @@ export function MenuForm({ onCreateMenu }: MenuFormProps) {
     }
   }, [platesAmount])
 
-  const isBasicInformationsFilled = !!daysCount && !!platesAmount && !!budget
   const isPlatesFilled = isAllPlatesFilled()
+
+  const daysCountHasError =
+    daysCount !== null && (daysCount < 1 || daysCount > 21)
+  const platesAmountHasError =
+    platesAmount !== null && (platesAmount < 1 || platesAmount > 50)
+  const budgetHasError = budget !== null && (budget < 0 || budget > 100)
+  const isBasicInformationsFilled = !!daysCount && !!platesAmount && !!budget
+
+  const isBasicInformationsValid =
+    !daysCountHasError &&
+    !platesAmountHasError &&
+    !budgetHasError &&
+    isBasicInformationsFilled
 
   return (
     <div className="flex flex-col gap-6 mt-8">
@@ -89,34 +112,40 @@ export function MenuForm({ onCreateMenu }: MenuFormProps) {
       </p>
 
       <form className="flex flex-col gap-10">
-        <div className="flex gap-6">
+        <div className="grid gap-x-6 grid-cols-3">
           <Input
             label="Quantidade de dias que deseja planejar:*"
             name="days"
             placeholder="Ex: 3"
             onChange={(event) => setDaysCount(Number(event.target.value))}
+            errorMessage="Informe uma quantidade maior ou igual a 1 e menor ou igual a 21"
+            hasError={daysCountHasError}
           />
           <Input
             label="Quantidade de pratos:*"
             name="plates"
             placeholder="Ex: 5"
             onChange={(event) => setPlatesAmount(Number(event.target.value))}
+            errorMessage="Informe uma quantidade maior ou igual a 1 e menor ou igual a 50"
+            hasError={platesAmountHasError}
           />
           <Input
             label="Orçamento:*"
             name="budget"
             placeholder="Ex: R$20,00"
             onChange={(event) => setBudget(Number(event.target.value))}
+            errorMessage="Informe um orçamento entre R$0,00 e R$100,00"
+            hasError={budgetHasError}
           />
         </div>
 
-        {isBasicInformationsFilled ? (
+        {isBasicInformationsValid ? (
           <div className="flex flex-col gap-6">
             <p className="text-zinc-200 text-lg">
               Informe o custo e o lucro de cada prato abaixo:
             </p>
 
-            <div className="flex gap-10 flex-wrap">
+            <div className="grid grid-cols-2 gap-x-8 gap-y-6">
               {plates.map((plate) => (
                 <PlateForm
                   key={plate.name}

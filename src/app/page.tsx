@@ -7,20 +7,25 @@ import { MenuForm, PlateProps } from '@/components/MenuForm'
 
 import { createMenu } from '@/utils/create-more-profitable-menu'
 
+export interface MenuInformations {
+  menu: MenuProps
+  maxProfit: number
+}
+
 export default function Home() {
-  const [menu, setMenu] = useState<MenuProps | null>(null)
+  const [menuInformations, setMenuInformations] =
+    useState<MenuInformations | null>(null)
 
   function onCreateMenu(
     daysCount: number,
     budget: number,
     plates: PlateProps[],
   ) {
-    console.log(plates)
-    setMenu(createMenu(daysCount, budget, plates))
+    setMenuInformations(createMenu(daysCount, budget, plates))
   }
 
   function onCreateAnotherMenu() {
-    setMenu(null)
+    setMenuInformations(null)
   }
 
   return (
@@ -29,8 +34,11 @@ export default function Home() {
         Problema do cardápio
       </h1>
 
-      {menu ? (
-        <Menu menu={menu} onCreateAnotherMenu={onCreateAnotherMenu} />
+      {menuInformations ? (
+        <Menu
+          menuInformations={menuInformations}
+          onCreateAnotherMenu={onCreateAnotherMenu}
+        />
       ) : (
         <MenuForm onCreateMenu={onCreateMenu} />
       )}

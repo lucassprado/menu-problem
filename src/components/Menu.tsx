@@ -1,24 +1,24 @@
 import { Plate } from './Plate'
 import { PlateProps } from './MenuForm'
 
+import { MenuInformations } from '@/app/page'
+
 export interface MenuProps {
   [key: string]: PlateProps
 }
 
 interface MenuComponentProps {
-  menu: MenuProps
+  menuInformations: MenuInformations
   onCreateAnotherMenu: () => void
 }
 
-export function Menu({ menu, onCreateAnotherMenu }: MenuComponentProps) {
+export function Menu({
+  menuInformations,
+  onCreateAnotherMenu,
+}: MenuComponentProps) {
   function handleCreateAnotherMenu() {
     onCreateAnotherMenu()
   }
-
-  const menuProfit = Object.values(menu).reduce(
-    (total, plate) => total + plate.profit,
-    0,
-  )
 
   return (
     <div className="w-full mt-20">
@@ -27,15 +27,15 @@ export function Menu({ menu, onCreateAnotherMenu }: MenuComponentProps) {
           Pratos escolhidos para o cardápio:
         </p>
 
-        <div className="grid grid-cols-4 gap-x-12 gap-y-12">
-          {Object.entries(menu).map(([day, plate]) => (
-            <Plate key={plate.name} day={day} plate={plate} />
+        <div className="grid grid-cols-4 gap-x-12 gap-y-12 items-center">
+          {Object.entries(menuInformations.menu).map(([day, plate]) => (
+            <Plate key={day} day={day} plate={plate} />
           ))}
         </div>
 
         <p className="text-zinc-100 text-2xl font-bold">
           Lucro total do cardápio:{' '}
-          <span className="text-zinc-300">R${menuProfit}</span>
+          <span className="text-zinc-300">R${menuInformations.maxProfit}</span>
         </p>
       </div>
 

@@ -25,6 +25,8 @@ o custo do prato selecionado como incrementado a variável de lucro máximo com 
 Ao final da execução, teremos o retorno de um objeto contendo o prato que será cozinhado
 em cada dia, e o lucro máximo que esse cardápio oferece.
 
+** **O arquivo com o algoritmo implementado está localizado no arquivo `src/utils/create-more-profitable-menu.ts`**
+
 ## Perguntas sobre o problema
 - Como esse problema pode ser modelado para o paradigma guloso?
   - R: A modelagem desse problema para o paradigma guloso é através das iterações sobre os pratos

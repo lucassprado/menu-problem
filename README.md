@@ -1,4 +1,4 @@
-## Problema do cozinheiro
+# Problema do cozinheiro
 
 ## Descrição do problema
 O algoritmo criado visa resolver o problema de um cozinheiro que deseja planejar

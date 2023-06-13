@@ -27,20 +27,20 @@ em cada dia, e o lucro máximo que esse cardápio oferece.
 
 ### Perguntas
 - Como esse problema pode ser modelado para o paradigma guloso?
-  R: A modelagem desse problema para o paradigma guloso é através das iterações sobre os pratos
+  - R: A modelagem desse problema para o paradigma guloso é através das iterações sobre os pratos
 disponíveis, dado um conjunto de pratos, iremos percorrer cada um desses pratos visando encontrar
 o prato que possua o maior lucro, porém respeitando as regras estabelecidas para pratos que são
 cozinhados em vários dias consecutivamente. Definindo um possível prato candidato a entrar no cardápio,
 iremos conseguir verificar se os demais pratos possuem o lucro maior ou não.
 - Seu algoritmo guloso apresenta a solução ótima? Por quê?
-  R: O algoritmo implementado apresenta uma solução ótima local, podendo apresentar uma solução ótima
+  - R: O algoritmo implementado apresenta uma solução ótima local, podendo apresentar uma solução ótima
 global dependendo da entrada de dados (ordenação dos pratos). Tendo em vista que um algoritmo guloso
 não analisa os dados após tomar uma decisão, pode acontecer casos de um prato em algum momento possuir
 um lucro maior que outro, mas por existir regras de cozinhar pratos iguais em dias consecutivos, ocorre
 a alteração do valor do lucro, o algoritmo pode fazer uma escolha ótima local durante aquela iteração, mas avaliando as demais iterações, ainda seria possível maximizar o lucro caso a ordem de algum
 prato fosse trocada.
 - Algum algoritmo clássico foi adaptado para resolver o problema, qual foi ele?
-  R: Nenhum algoritmo clássico foi adaptado para resolver o problema.
+  - R: Nenhum algoritmo clássico foi adaptado para resolver o problema.
 
 ### Como rodar o projeto
 Para rodar o projeto, será necessário ter instalado no computador o `NodeJS` na versão LTS (atualmente a 18.16.0) e o `NPM`, que é instalado junto com a instalação do `NodeJS`.

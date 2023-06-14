@@ -128,7 +128,7 @@ function calculateProfit(menu: MenuProps, day: number, plate: PlateProps) {
 
     // Como o prato já estará sendo cozinhado por dois dias seguidos,
     // seu lucro será de 50%
-    plateProfit = plateProfit / 2
+    plateProfit = plate.profit / 2
   }
 
   return plateProfit

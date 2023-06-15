@@ -119,16 +119,16 @@ function calculateProfit(menu: MenuProps, day: number, plate: PlateProps) {
 
   // Verifica se o prato atual é igual ao prato do dia anterior
   if (isPlateEqualToMenuPlateFromOneDayAgo) {
+    // Como o prato já estará sendo cozinhado por dois dias seguidos,
+    // seu lucro será de 50%
+    plateProfit = plateProfit / 2
+
     // Verifica se o prato atual é igual ao prato de dois dias atrás
     if (isPlateEqualToMenuPlateFromTwoDayAgo) {
       // Como o prato já estará sendo cozinhado por 3 dias seguidos,
       // seu lucro será 0
       plateProfit = 0
     }
-
-    // Como o prato já estará sendo cozinhado por dois dias seguidos,
-    // seu lucro será de 50%
-    plateProfit = plate.profit / 2
   }
 
   return plateProfit
